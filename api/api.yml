@@ -3,7 +3,7 @@ services:
   api:
     image: api:p_league
     ports:
-      - 8888:888
+      - 8888:8888
     hostname: "api"
     restart: always
     environment:

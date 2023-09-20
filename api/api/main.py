@@ -16,7 +16,6 @@ def get_mysql_conn() -> engine.base.Connection:
 
 app = FastAPI()
 
-
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
@@ -57,6 +56,9 @@ def player_season_stats(
         ROUND(sum(two_m+1.5*trey_m)/sum(two_a+trey_a), 4) as effective_field_goal_percentage,
         ROUND(sum(points)/sum(2*(two_a+trey_a+ft_a*0.44)), 4) as true_shooting_percentage
         """
+    else:
+        advanced_stats_sql = ""
+
     sql = f"""
     SELECT name, season, 
     count(distinct CASE WHEN seconds > 0 THEN game_id END) as games,
