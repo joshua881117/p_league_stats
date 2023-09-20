@@ -1,0 +1,16 @@
+version: '3.0'
+services: 
+  api:
+    image: api:p_league
+    ports:
+      - 8888:888
+    hostname: "api"
+    restart: always
+    environment:
+      - TZ=Asia/Taipei
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    external: true
