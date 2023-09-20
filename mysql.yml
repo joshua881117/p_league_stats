@@ -24,7 +24,7 @@ services:
           # 將 docker container 的 volumes 跟外部 volumes 做連結, 
           # 讓資料不會因為, container close or update, 而遺失
       networks:
-          - p_league
+          - my_network
 
   phpmyadmin:
       image: phpmyadmin/phpmyadmin:5.1.0
@@ -35,10 +35,10 @@ services:
       depends_on:
         - mysql
       networks:
-          - p_league
+          - my_network
      
 networks:
-  p_league:
+  my_network:
     external: true
 
 volumes:

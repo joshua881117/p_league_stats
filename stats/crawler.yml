@@ -8,7 +8,7 @@ services:
     environment:
       - TZ=Asia/Taipei
     networks:
-      - p_league
+      - my_network
 
   crawler_year:
     image: crawler:p_league
@@ -18,8 +18,8 @@ services:
     environment:
       - TZ=Asia/Taipei
     networks:
-      - p_league
+      - my_network
 networks:
-  p_league:
+  my_network:
     # 加入已經存在的網路
     external: true
