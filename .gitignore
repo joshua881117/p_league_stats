@@ -2,3 +2,6 @@
 
 # 忽略所有附檔名是 .ipynb 的檔案
 *.ipynb
+
+# 忽略 stats/stats/test.py 檔案
+stats/stats/test.py
