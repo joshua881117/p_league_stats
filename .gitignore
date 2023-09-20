@@ -1,0 +1,4 @@
+# 檔案名稱 .gitignore
+
+# 忽略所有附檔名是 .ipynb 的檔案
+*.ipynb
