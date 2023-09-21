@@ -1,7 +1,7 @@
 version: '3.0'
 services: 
   api:
-    image: api:p_league
+    image: joshua881117/api:p_league
     ports:
       - 8888:8888
     hostname: "api"
