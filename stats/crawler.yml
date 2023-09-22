@@ -3,7 +3,7 @@ services:
   crawler_game:
     image: crawler:p_league
     hostname: "game"
-    command: pipenv run celery -A stats.tasks.worker worker --loglevel=info --concurrency=1  --hostname=%h --timezone=Asia/Taipei -Q game
+    command: pipenv run celery -A stats.tasks.worker worker --loglevel=info --concurrency=1  --hostname=%h -Q game
     restart: always
     environment:
       - TZ=Asia/Taipei
@@ -18,7 +18,7 @@ services:
   crawler_year:
     image: crawler:p_league
     hostname: "year"
-    command: pipenv run celery -A stats.tasks.worker worker --loglevel=info --concurrency=1 --hostname=%h --timezone=Asia/Taipei -Q year
+    command: pipenv run celery -A stats.tasks.worker worker --loglevel=info --concurrency=1 --hostname=%h -Q year
     restart: always
     environment:
       - TZ=Asia/Taipei
