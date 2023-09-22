@@ -37,7 +37,7 @@ services:
       links: 
           - mysql:db
       ports:
-          - 8000:80
+          - 8001:80
       depends_on:
         - mysql
       deploy:
