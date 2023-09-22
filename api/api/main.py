@@ -9,6 +9,7 @@ def get_mysql_conn() -> engine.base.Connection:
         f"mysql+pymysql://{config.MYSQL_DATA_USER}:{config.MYSQL_DATA_PASSWORD}"
         f"@{config.MYSQL_DATA_HOST}:{config.MYSQL_DATA_PORT}/{config.MYSQL_DATA_DATABASE}"
     )
+
     engine = create_engine(address)
     connect = engine.connect()
     return connect
@@ -139,3 +140,6 @@ def player_season_stats(
         conn.commit()
         data_dict = data_df.to_dict("records") # records: 轉換為 list 形式
     return {"data": data_dict}
+
+
+def fib()
