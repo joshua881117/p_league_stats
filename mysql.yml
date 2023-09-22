@@ -17,7 +17,6 @@ services:
           MYSQL_USER: root
           MYSQL_PASSWORD: test
           MYSQL_ROOT_PASSWORD: test
-          PMA_HOST: mysql
       volumes:
           - mysql:/var/lib/mysql
           # share volumes of docker container to outside volume, 
@@ -38,6 +37,11 @@ services:
           - mysql:db
       ports:
           - 8001:80
+      environment:
+          MYSQL_USER: user
+          MYSQL_PASSWORD: test
+          MYSQL_ROOT_PASSWORD: test
+          PMA_HOST: mysql
       depends_on:
         - mysql
       deploy:
