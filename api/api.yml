@@ -8,6 +8,11 @@ services:
     restart: always
     environment:
       - TZ=Asia/Taipei
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.api == true]
     networks:
       - my_network
 
