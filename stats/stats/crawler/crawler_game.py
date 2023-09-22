@@ -52,27 +52,32 @@ def convert_raw_data_to_df(raw_data: typing.Dict, home_team_id: int, away_team_i
     df_away = convert_datatype(df_away.copy())
     df_away['team_id'] = away_team_id
     df = pd.concat([df_home, df_away])
+    df = df.reset_index(drop=True)
     return df
 
 def get_team_id(soup: BeautifulSoup, conn: engine.base.Connection):
-    away_team = soup.find("div", "col-lg-7 col-12 text-right align-self-center").find("h6", "pb-0 mb-0 mt-2 fs14").\
-        get_text().strip("\n ")
-    home_team = soup.find("div", "col-lg-7 col-12 text-left align-self-center").find("h6", "pb-0 mb-0 mt-2 fs14").\
-        get_text().strip("\n ")
-    away_team_id = db_execute.search_data(f"team='{away_team}'", "id", "team_list", conn)
-    home_team_id = db_execute.search_data(f"team='{home_team}'", "id", "team_list", conn)
-    if len(away_team_id) == 0:
-        data={'team':away_team_id}
-        df = pd.DataFrame(data=data, index=[0])
-        db_execute.upload_data(df, 'team_list', conn)
+    try:
+        away_team = soup.find("div", "col-lg-7 col-12 text-right align-self-center").find("h6", "pb-0 mb-0 mt-2 fs14").\
+            get_text().strip("\n ")
+        home_team = soup.find("div", "col-lg-7 col-12 text-left align-self-center").find("h6", "pb-0 mb-0 mt-2 fs14").\
+            get_text().strip("\n ")
         away_team_id = db_execute.search_data(f"team='{away_team}'", "id", "team_list", conn)
-    if len(home_team_id) == 0:
-        data={'team':home_team_id}
-        df = pd.DataFrame(data=data, index=[0])
-        db_execute.upload_data(df, 'team_list', conn)
         home_team_id = db_execute.search_data(f"team='{home_team}'", "id", "team_list", conn)
-    return home_team_id[0][0], away_team_id[0][0]
-
+        if len(away_team_id) == 0:
+            data={'team':away_team_id}
+            df = pd.DataFrame(data=data, index=[0])
+            db_execute.upload_data(df, 'team_list', conn)
+            away_team_id = db_execute.search_data(f"team='{away_team}'", "id", "team_list", conn)
+        if len(home_team_id) == 0:
+            data={'team':home_team_id}
+            df = pd.DataFrame(data=data, index=[0])
+            db_execute.upload_data(df, 'team_list', conn)
+            home_team_id = db_execute.search_data(f"team='{home_team}'", "id", "team_list", conn)
+        return home_team_id[0][0], away_team_id[0][0]
+    except Exception as e:
+        logger.info(e)
+        return False
+    
 def get_game_id(season: str, game: int, home_team_id: int, away_team_id: int, conn: engine.base.Connection):
     game_id = db_execute.search_data(f"season='{season}' and game={game}", "id", "game_list", conn)
     if len(game_id) == 0:
@@ -89,6 +94,7 @@ def insert_player_id(df: pd.DataFrame, conn: engine.base.Connection):
     db_execute.upload_data(df, 'player_list', conn)
 
 def parameter_game(parameter: typing.List[str]):
+    """回傳該賽季場次對應的 game index"""
     season = parameter[0]
     start_game = int(parameter[1])
     end_game = int(parameter[-1])
@@ -113,11 +119,17 @@ def crawler(id: str) -> pd.DataFrame:
         # 該場主客場隊名
         team_url = f"https://pleagueofficial.com/game/{id}"
         team_r = requests.get(url=team_url, headers=pleague_header())
+        if team_r == '':
+            return pd.DataFrame()
         soup = BeautifulSoup(team_r.text, "html.parser")
+        if get_team_id(soup, conn) == False:
+            return pd.DataFrame()
         home_team_id, away_team_id = get_team_id(soup, conn)
         # 單場數據
         stats_url = f"https://pleagueofficial.com/api/boxscore.php?id={id}&away_tab=total&home_tab=total"
         stats_r = requests.get(url=stats_url, headers=pleague_header())
+        if stats_r == '':
+            return pd.DataFrame()
         raw_data = stats_r.json()['data']
         df = convert_raw_data_to_df(raw_data, home_team_id, away_team_id)
 

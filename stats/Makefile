@@ -22,3 +22,6 @@ execute-game-task:
 
 execute-year-task:
 	pipenv run celery -A stats.tasks.worker worker --loglevel=info --concurrency=1  --hostname=%h -Q year
+
+test-cov:
+	pipenv run pytest --cov-report term-missing --cov-config=.coveragerc --cov=./stats/ tests/

@@ -10,10 +10,13 @@ stats.egg-info/top_level.txt
 stats/backend/__init__.py
 stats/backend/db/__init__.py
 stats/backend/db/client.py
+stats/backend/db/db_execute.py
 stats/backend/db/router.py
-stats/backend/db/upload.py
 stats/schema/__init__.py
 stats/schema/dataset.py
 stats/tasks/__init__.py
 stats/tasks/task.py
 stats/tasks/worker.py
+tests/__init__.py
+tests/crawler/__init__.py
+tests/crawler/test_crawler_game.py

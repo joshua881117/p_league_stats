@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
+pytest = "*"
 
 [packages]
 pandas = "*"
@@ -16,6 +17,8 @@ pymysql = "*"
 celery = "*"
 stats = {editable = true,path = "."}
 numpy = "*"
+pytest-cov = "*"
+pytest-mock = "*"
 
 [requires]
 python_version = "3.11"

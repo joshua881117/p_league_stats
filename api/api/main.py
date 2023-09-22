@@ -71,9 +71,9 @@ def player_season_stats(
     ROUND({aggregate_func}(blk), 2) as blocks,
     ROUND({aggregate_func}(pfoul), 2) as personal_fouls,
     ROUND({aggregate_func}(turnover), 2) as turnovers,
-    sum(two_m+trey_m)/sum(two_a+trey_a) as field_goal_presentage,
-    sum(trey_m)/sum(trey_a) as 3point_presentage,
-    sum(ft_m)/sum(ft_a) as free_throw_presentage
+    sum(two_m+trey_m)/sum(two_a+trey_a) as field_goal_percentage,
+    sum(trey_m)/sum(trey_a) as 3point_percentage,
+    sum(ft_m)/sum(ft_a) as free_throw_percentage
     {more_stats_sql}
     {advanced_stats_sql}
     FROM game_stats s 
@@ -90,7 +90,7 @@ def player_season_stats(
     return {"data": data_dict}
 
 @app.get("/team_season_stats")
-def player_season_stats(
+def team_season_stats(
     season: str = "",
     team_name: str = ""
 ):
@@ -142,4 +142,3 @@ def player_season_stats(
     return {"data": data_dict}
 
 
-def fib()
