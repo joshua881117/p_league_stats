@@ -17,12 +17,18 @@ services:
           MYSQL_USER: root
           MYSQL_PASSWORD: test
           MYSQL_ROOT_PASSWORD: test
+          PMA_HOST: mysql
       volumes:
           - mysql:/var/lib/mysql
           # share volumes of docker container to outside volume, 
           # let data persist
           # 將 docker container 的 volumes 跟外部 volumes 做連結, 
           # 讓資料不會因為, container close or update, 而遺失
+      deploy:
+        mode: replicated
+        replicas: 1
+        placement:
+          constraints: [node.labels.mysql == true]
       networks:
           - my_network
 
@@ -34,6 +40,11 @@ services:
           - 8000:80
       depends_on:
         - mysql
+      deploy:
+        mode: replicated
+        replicas: 1
+        placement:
+          constraints: [node.labels.mysql == true]
       networks:
           - my_network
      

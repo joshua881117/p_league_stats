@@ -10,6 +10,11 @@ services:
       RABBITMQ_DEFAULT_USER: "worker"
       RABBITMQ_DEFAULT_PASS: "worker"
       RABBITMQ_DEFAULT_VHOST: "/"
+    deploy:
+        mode: replicated
+        replicas: 1
+        placement:
+          constraints: [node.labels.rabbitmq == true]
     networks:
       - my_network
 
@@ -20,6 +25,11 @@ services:
       - 5555:5555
     depends_on:
       - rabbitmq
+    deploy:
+        mode: replicated
+        replicas: 1
+        placement:
+          constraints: [node.labels.flower == true]
     networks:
       - my_network
 
