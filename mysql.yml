@@ -14,8 +14,8 @@ services:
         #   mode: host
       environment: # 環境變數, 設置 db, user, password, root_password
           MYSQL_DATABASE: mydb
-          MYSQL_USER: root
-          MYSQL_PASSWORD: test
+          # MYSQL_USER: root
+          # MYSQL_PASSWORD: test
           MYSQL_ROOT_PASSWORD: test
       volumes:
           - mysql:/var/lib/mysql
