@@ -4,7 +4,7 @@ from dataflow.constant import (
     DEFAULT_ARGS,
     MAX_ACTIVE_RUNS,
 )
-from dataflow.etl.hello_world import (
+from dataflow.etl.test import (
     create_hello_world_task,
 )
 
