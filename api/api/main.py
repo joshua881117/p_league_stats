@@ -17,10 +17,28 @@ def get_mysql_conn() -> engine.base.Connection:
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
+@app.get("/player_game_stats")
+def player_game_stats(
+    season: str = "",
+    player_name: str = "",
+    game: int = 0
+):
+    sql = f"""
+    SELECT season, game, name, starter, team, number, 
+    ROUND(seconds/60, 2) as mins, 
+    points, reb_d as defensive_rebounds, reb_o as offensive_rebounds,  
+    ast as assists, blk as blocks, stl as steals, turnover as turnovers, 
+    pfoul as personal_fouls, 
+    trey_m as 3points_made, trey_a as 3points_attempted, 
+    two_m as 2points_made, two_a as 2points_attempted,
+    ft_m as free_throw_made, ft_a as free_throw_attempted, 
+    oncourt_plus_minus
+    FROM game_stats s 
+    LEFT JOIN game_list g on s.game_id = g.id
+    LEFT JOIN player_list p on s.player_id = p.id
+    LEFT JOIN team_list t on s.team_id = t.id
+    WHERE season = "{season}" and game = {game} and name = "{player_name}"
+    """
 
 @app.get("/player_season_stats")
 def player_season_stats(
