@@ -39,6 +39,13 @@ def player_game_stats(
     LEFT JOIN team_list t on s.team_id = t.id
     WHERE season = "{season}" and game = {game} and name = "{player_name}"
     """
+    with get_mysql_conn() as conn:
+        sql_query = text(sql)
+        data_df = pd.read_sql(sql_query, con=conn)
+        conn.commit()
+        data_dict = data_df.to_dict("records") # records: 轉換為 list 形式
+    return {"data": data_dict}
+
 
 @app.get("/player_season_stats")
 def player_season_stats(
