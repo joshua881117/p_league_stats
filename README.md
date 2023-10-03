@@ -18,9 +18,11 @@
 ![image](https://github.com/joshua881117/p_league_stats/blob/3693680de02fb142ab4656d123f7c9161ac46fb4/%E6%88%AA%E5%9C%96%202023-10-03%20%E4%B8%8B%E5%8D%8812.09.17.png)
 
 專案中架設的服務(資料庫、爬蟲、API...等)都是用 Docker 建立，並透過 Docker Swarm 管理
+![image](https://github.com/joshua881117/p_league_stats/blob/b24fae57aabecbd19cdfcaf3ba7058c798b304b2/%E6%88%AA%E5%9C%96%202023-10-03%20%E4%B8%8B%E5%8D%8812.25.35.png)
 
 建立 CI/CD 流程，當程式碼有變更時，會進行測試、建立映像檔以及自動部署
-
+![image](https://github.com/joshua881117/p_league_stats/blob/b24fae57aabecbd19cdfcaf3ba7058c798b304b2/%E6%88%AA%E5%9C%96%202023-10-03%20%E4%B8%8B%E5%8D%8812.24.31.png)
+![image](https://github.com/joshua881117/p_league_stats/blob/b24fae57aabecbd19cdfcaf3ba7058c798b304b2/%E6%88%AA%E5%9C%96%202023-10-03%20%E4%B8%8B%E5%8D%8812.20.36.png)
 
 ## 相關網址
 - [API](http://172.105.226.173:8889/docs)
