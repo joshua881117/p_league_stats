@@ -35,8 +35,8 @@
       - player_name: 球員名稱（例：林志傑）
       - total_or_avg：累計數據或平均數據，填寫 total 或 avg
       - more_stats：是否要更多數據，填寫 1 或 0
-      - advanced_stats：是否要進階數據，填寫 1 或 0   
--  team_season_stats（球隊該賽季整體數據）
+      - advanced_stats：是否要進階數據，填寫 1 或 0
+  -  team_season_stats（球隊該賽季整體數據）
       - season：賽季，填寫 2020-21 或 2021-22
       - team_name: 球隊名稱（例：臺北富邦勇士）
 
