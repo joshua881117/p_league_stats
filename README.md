@@ -6,15 +6,16 @@
 
 ## 專案架構
 專案主要分為兩個部分，第一部分是爬蟲，先將資料從官網上爬取下來並存入資料庫；再建立 API 提供使用者存取數據
-![image](https://github.com/joshua881117/p_league_stats/blob/07b88b0e20df970f3c0b56b417ad6c9cfe53caa3/%E6%88%AA%E5%9C%96%202023-10-03%20%E4%B8%8B%E5%8D%8812.09.07.png)
 - 爬蟲
     - 運用 Python 撰寫爬蟲程式碼
     - 運用 RabbitMQ + Celery 開啟多個 Worker 將前兩季的每場數據爬下
     - 將爬下的數據匯入 MySQL 資料庫
-![image](https://github.com/joshua881117/p_league_stats/blob/3693680de02fb142ab4656d123f7c9161ac46fb4/%E6%88%AA%E5%9C%96%202023-10-03%20%E4%B8%8B%E5%8D%8812.09.17.png)
+![image](https://github.com/joshua881117/p_league_stats/blob/07b88b0e20df970f3c0b56b417ad6c9cfe53caa3/%E6%88%AA%E5%9C%96%202023-10-03%20%E4%B8%8B%E5%8D%8812.09.07.png)
+
 - API
     - 運用 Python 建立 FastAPI
     - API 發送 requests 會到 MySQL 資料庫中拿取特定資料並回傳給使用者
+![image](https://github.com/joshua881117/p_league_stats/blob/3693680de02fb142ab4656d123f7c9161ac46fb4/%E6%88%AA%E5%9C%96%202023-10-03%20%E4%B8%8B%E5%8D%8812.09.17.png)
 
 專案中架設的服務(資料庫、爬蟲、API...等)都是用 Docker 建立，並透過 Docker Swarm 管理
 
